@@ -144,7 +144,11 @@ else
 fi
 
 printf "\033[34m* Starting the Agent...\n\033[0m\n"
-$sudo_cmd /etc/init.d/datadog-agent restart
+if [ $OS = "Debian" ]; then
+    $sudo_cmd service datadog-agent restart
+else
+    $sudo_cmd /etc/init.d/datadog-agent restart
+fi
 
 # Wait for metrics to be submitted by the forwarder
 printf "\033[32m
