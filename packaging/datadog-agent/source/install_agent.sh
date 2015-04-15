@@ -5,7 +5,7 @@ logfile="ddagent-install.log"
 gist_request=/tmp/agent-gist-request.tmp
 gist_response=/tmp/agent-gist-response.tmp
 
-if [ $(which curl) ]; then
+if [ $(command -v curl) ]; then
     dl_cmd="curl -f"
 else
     dl_cmd="wget --quiet"
@@ -145,7 +145,7 @@ fi
 
 printf "\033[34m* Starting the Agent...\n\033[0m\n"
 if [ $OS = "Debian" ]; then
-    $sudo_cmd service datadog-agent restart
+    $sudo_cmd invoke-rc.d datadog-agent restart
 else
     $sudo_cmd /etc/init.d/datadog-agent restart
 fi
